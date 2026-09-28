@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Autorisation_tStore;
 use App\Models\Autorisation_t; 
 use Illuminate\Support\Facades\View;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Http\Response;
 
@@ -62,7 +62,7 @@ class Autorisation_tController extends Controller
   
         $datat = DB::select("SELECT numero, num_laissez_passer, TO_CHAR(date_transport, 'DD-MM-YYYY') as date_transport1, quantite_t, reste FROM autorisation_t
         where autorisation_c_id = $id ORDER BY date_transport1 ASC");
-        $pdf = PDF::loadView('pdf.index', compact('data', 'datat'))->setPaper('A4');;
+        $pdf = Pdf::loadView('pdf.index', compact('data', 'datat'))->setPaper('A4');
 
         // Set paper size and orientation
       
@@ -80,7 +80,7 @@ class Autorisation_tController extends Controller
 
     $datat = DB::select("SELECT numero, num_laissez_passer, TO_CHAR(date_transport, 'DD-MM-YYYY') as date_transport1, quantite_t, reste FROM autorisation_t
     where autorisation_c_id = $id ORDER BY date_transport1 ASC");
-    $pdf = PDF::loadView('pdf.index', compact('data', 'datat'))->setPaper('A4');;
+    $pdf = Pdf::loadView('pdf.index', compact('data', 'datat'))->setPaper('A4');
 
     // Set paper size and orientation
   
